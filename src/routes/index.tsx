@@ -213,7 +213,12 @@ function Overview() {
             0–100 summary of flow, delays and congestion.
           </p>
           <div className="flex items-center gap-4">
-            <div className="relative grid size-28 place-items-center rounded-full bg-[conic-gradient(var(--tw-gradient-stops))] from-primary to-accent">
+            <div
+              className="relative grid size-28 place-items-center rounded-full"
+              style={{
+                background: `conic-gradient(oklch(0.79 0.15 197) ${BASELINE.healthScore}%, oklch(0.27 0.035 260) ${BASELINE.healthScore}% 100%)`,
+              }}
+            >
               <div className="grid size-24 place-items-center rounded-full bg-card">
                 <span className="text-3xl font-semibold">{BASELINE.healthScore}</span>
               </div>
