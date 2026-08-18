@@ -16,6 +16,7 @@ import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as LiveTwinRouteImport } from './routes/live-twin'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SimulationRouteImport } from './routes/simulation'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const OrdersRoute = OrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SimulationRoute = SimulationRouteImport.update({
   id: '/simulation',
   path: '/simulation',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/live-twin': typeof LiveTwinRoute
   '/orders': typeof OrdersRoute
+  '/settings': typeof SettingsRoute
   '/simulation': typeof SimulationRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/live-twin': typeof LiveTwinRoute
   '/orders': typeof OrdersRoute
+  '/settings': typeof SettingsRoute
   '/simulation': typeof SimulationRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/live-twin': typeof LiveTwinRoute
   '/orders': typeof OrdersRoute
+  '/settings': typeof SettingsRoute
   '/simulation': typeof SimulationRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/live-twin'
     | '/orders'
+    | '/settings'
     | '/simulation'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/live-twin'
     | '/orders'
+    | '/settings'
     | '/simulation'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/live-twin'
     | '/orders'
+    | '/settings'
     | '/simulation'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   LiveTwinRoute: typeof LiveTwinRoute
   OrdersRoute: typeof OrdersRoute
+  SettingsRoute: typeof SettingsRoute
   SimulationRoute: typeof SimulationRoute
 }
 
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/simulation': {
       id: '/simulation'
       path: '/simulation'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   LiveTwinRoute: LiveTwinRoute,
   OrdersRoute: OrdersRoute,
+  SettingsRoute: SettingsRoute,
   SimulationRoute: SimulationRoute,
 }
 export const routeTree = rootRouteImport
