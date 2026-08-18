@@ -1,15 +1,15 @@
 import type { SimParams, SimResult, Severity } from "./types";
 
 export const DEFAULT_PARAMS: SimParams = {
-  orderVolume: 620,
-  workers: 8,
+  orderVolume: 470,
+  workers: 12,
   forklifts: 4,
   amrs: 6,
   pickingSpeed: 100,
   conveyorSpeed: 100,
   docks: 4,
   failureProbability: 6,
-  trafficDensity: 55,
+  trafficDensity: 35,
   supplierDelay: 10,
   demandSurge: 0,
 };
@@ -64,8 +64,8 @@ export function runSimulation(p: SimParams): SimResult {
   const demand = p.orderVolume * (1 + p.demandSurge / 100);
 
   const pickCapacity = p.workers * 62 * (p.pickingSpeed / 100);
-  const fleetCapacity = (p.forklifts * 46 + p.amrs * 38) * (1 - p.trafficDensity / 260);
-  const packCapacity = 260 * (p.conveyorSpeed / 100);
+  const fleetCapacity = (p.forklifts * 70 + p.amrs * 60) * (1 - p.trafficDensity / 260);
+  const packCapacity = 720 * (p.conveyorSpeed / 100);
   const shipCapacity = p.docks * 165;
 
   const reliability = 1 - p.failureProbability / 130;
