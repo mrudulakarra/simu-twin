@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LiveTwinRouteImport } from './routes/live-twin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LiveTwinRoute = LiveTwinRouteImport.update({
+  id: '/live-twin',
+  path: '/live-twin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/live-twin': typeof LiveTwinRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/live-twin': typeof LiveTwinRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/live-twin': typeof LiveTwinRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/live-twin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/live-twin'
+  id: '__root__' | '/' | '/live-twin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LiveTwinRoute: typeof LiveTwinRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/live-twin': {
+      id: '/live-twin'
+      path: '/live-twin'
+      fullPath: '/live-twin'
+      preLoaderRoute: typeof LiveTwinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LiveTwinRoute: LiveTwinRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
