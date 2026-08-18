@@ -241,7 +241,10 @@ function SimulationLab() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  if (!saved.length) return toast.error("Save a scenario first to compare against it.");
+                  if (!saved.length) {
+                    toast.error("Save a scenario first to compare against it.");
+                    return;
+                  }
                   setCompareId(saved[0]!.id);
                   toast.info(`Comparing with “${saved[0]!.name}”`);
                 }}
